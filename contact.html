@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node Js Practice Website</title>
+    <link rel="stylesheet" href="./public/style.css" type="text/css" />
+</head>
+<body>
+    <h1>CONTACT US</h1>
+    <h3>This is an amazing website that the world needs</h3>
+    <div id="users">
+
+    </div>
+</body>
+<script>
+    fetch("https://jsonplaceholder.typicode.com/users/")
+    .then((response)=>{
+        return response.json()
+    })
+    //the first .then is for converting to json
+    .then((data)=>{
+        //console.log(data)
+            for (let index = 0; index < data.length; index++) {
+                const element = data[index];
+                document.querySelector("#users").innerHTML += `
+                    <h2>username : ${element.username}</h2>
+                    <p>email: ${element.email}</p>
+                    <p>street : ${element.address.street}</p>
+                    <p>website : ${element.website}</p>
+                    <hr>
+                `
+            }
+    })
+    //.then now returns a data from the json()
+    .catch((err)=>{
+        console.log(err)
+    });
+</script>
+</html>
